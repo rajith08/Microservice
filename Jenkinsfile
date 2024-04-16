@@ -4,15 +4,20 @@ pipeline {
     stages {
         stage('Build & Tag Docker Image') {
             steps {
-                withDockerRegistry(credentialsId: 'docker-creds', toolName: 'docker') {
-                 sh "docker build -t rajith08/cartservice:latest"    
+                script {
+                   withDockerRegistry(credentialsId: 'docker-creds', toolName: 'docker') {
+                      sh "docker build -t rajith08/cartservice:latest"    
+                   }
                 }
+                
             }
         }
         stage('Push Docker Image') {
             steps {
-                withDockerRegistry(credentialsId: 'docker-creds', toolName: 'docker') {
-                 sh "docker push -t rajith08/cartservice:latest"    
+                script {
+                    withDockerRegistry(credentialsId: 'docker-creds', toolName: 'docker') {
+                       sh "docker push -t rajith08/cartservice:latest"    
+                    }
                 }
             }
         }
