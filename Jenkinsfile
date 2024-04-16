@@ -5,18 +5,18 @@ pipeline {
         stage('Build & Tag Docker Image') {
             steps {
                 script {
-                    withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                        sh "docker build -t adijaiswal/frontend:latest ."
-                    }
+                   withDockerRegistry(credentialsId: 'docker-creds', toolName: 'docker') {
+                      sh "docker build -t rajith08/frontend:latest"    
+                   }
                 }
+                
             }
         }
-        
         stage('Push Docker Image') {
             steps {
                 script {
-                    withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                        sh "docker push adijaiswal/frontend:latest"
+                    withDockerRegistry(credentialsId: 'docker-creds', toolName: 'docker') {
+                       sh "docker push -t rajith08/frontend:latest"    
                     }
                 }
             }
